@@ -1,26 +1,33 @@
 <?php
 
-Route::group(['prefix' => 'v1', 'as' => 'api.', 'namespace' => 'Api\V1\Admin', 'middleware' => ['auth:api']], function () {
-    // Permissions
-    Route::apiResource('permissions', 'PermissionsApiController');
+Route::group(['as' => 'api.', 'namespace' => 'Api\V1'], function () {
+    Route::get('home', 'HomeController@index')->name('home');
+    Route::get('menu', 'HomeController@menu')->name('menu');
+    
+    Route::apiResource('courses', 'CourseController')->only(['index', 'show']);
 
-    // Roles
-    Route::apiResource('roles', 'RolesApiController');
+    Route::group(['prefix' => 'v1', 'as' => 'admin.', 'namespace' => 'Admin', 'middleware' => ['auth:api']], function () {
+        // Permissions
+        Route::apiResource('permissions', 'PermissionsApiController');
 
-    // Users
-    Route::apiResource('users', 'UsersApiController');
+        // Roles
+        Route::apiResource('roles', 'RolesApiController');
 
-    // Disciplines
-    Route::apiResource('disciplines', 'DisciplinesApiController');
+        // Users
+        Route::apiResource('users', 'UsersApiController');
 
-    // Institutions
-    Route::post('institutions/media', 'InstitutionsApiController@storeMedia')->name('institutions.storeMedia');
-    Route::apiResource('institutions', 'InstitutionsApiController');
+        // Disciplines
+        Route::apiResource('disciplines', 'DisciplinesApiController');
 
-    // Courses
-    Route::post('courses/media', 'CoursesApiController@storeMedia')->name('courses.storeMedia');
-    Route::apiResource('courses', 'CoursesApiController');
+        // Institutions
+        Route::post('institutions/media', 'InstitutionsApiController@storeMedia')->name('institutions.storeMedia');
+        Route::apiResource('institutions', 'InstitutionsApiController');
 
-    // Enrollments
-    Route::apiResource('enrollments', 'EnrollmentsApiController');
+        // Courses
+        Route::post('courses/media', 'CoursesApiController@storeMedia')->name('courses.storeMedia');
+        Route::apiResource('courses', 'CoursesApiController');
+
+        // Enrollments
+        Route::apiResource('enrollments', 'EnrollmentsApiController');
+    });
 });
