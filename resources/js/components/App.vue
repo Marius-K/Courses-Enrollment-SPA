@@ -1,19 +1,18 @@
 <template>
-  <section id="app">
-    <TheHeader></TheHeader>
-    <router-view :key="$route.fullPath" />
-    <TheFooter></TheFooter>
-  </section>
+  <div id="app">
+    <component :is="layout">
+      <router-view />
+    </component>
+  </div>
 </template>
 
 <script>
-import TheHeader from "./TheHeader.vue"
-import TheFooter from "./TheFooter.vue"
-
 export default {
     el: '#app',
-    components: {
-      TheHeader, TheFooter
+    computed: {
+      layout () {
+        return (this.$route.meta.layout || 'landing') + '-layout';
+      }
     }
 }
 </script>

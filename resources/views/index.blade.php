@@ -6,7 +6,6 @@
 
   <title>{{ config('app.name') }}</title>
   <link rel="icon" href="{{ asset('img/favicon.png') }}">
-  <link rel="stylesheet" href="{{ mix('css/app.css') }}">
   <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
   <link rel="stylesheet" href="{{ asset('css/animate.css') }}">
   <link rel="stylesheet" href="{{ asset('css/owl.carousel.min.css') }}">

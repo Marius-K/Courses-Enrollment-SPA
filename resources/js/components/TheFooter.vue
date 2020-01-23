@@ -4,7 +4,7 @@
       <div class="row justify-content-between">
         <div class="col-sm-6 col-md-4 col-xl-3">
           <div class="single-footer-widget footer_1">
-            <router-link :to="{name: 'home'}"> <img src="img/logo.png" alt=""> </router-link>
+            <router-link :to="{name: 'home'}"> <img src="/img/logo.png" alt=""> </router-link>
             <p>But when shot real her. Chamber her one visite removal six
                 sending himself boys scot exquisite existend an </p>
             <p>But when shot real her hamber her </p>

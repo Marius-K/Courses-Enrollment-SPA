@@ -4,7 +4,8 @@ export default {
   namespaced: true,
   state: {
     coursesData: [],
-    paginationData: {}
+    paginationData: {},
+    course: {}
   },
 
   getters: {
@@ -14,6 +15,10 @@ export default {
 
     pagination (state) {
       return state.paginationData;
+    },
+
+    course (state) {
+      return state.course;
     }
   },
 
@@ -24,6 +29,10 @@ export default {
 
     setPaginationData (state, data) {
       state.paginationData = data;
+    },
+
+    setCourse (state, {data}) {
+      state.course = data;
     }
   },
 
@@ -34,6 +43,13 @@ export default {
         const {data, ...pagination} = response.data;
         commit('setAllCourses', data);
         commit('setPaginationData', pagination);
+      });
+    },
+
+    fetchCourse ({commit}, id) {
+      axios.get('/api/courses/'+id)
+      .then(response => {
+        commit('setCourse', response.data);
       });
     }
   }
