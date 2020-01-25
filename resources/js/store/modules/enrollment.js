@@ -26,13 +26,6 @@ export default {
           router.push({
             name: "my-courses"
           });
-        })
-        .catch(({response}) => {
-          if(response.status === 422) {
-            commit('setErrors', response.data.errors, { root: true });
-          }
-          
-          commit('setLoading', false, { root: true });
         });
     }
   }

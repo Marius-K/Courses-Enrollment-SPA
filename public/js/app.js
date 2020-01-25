@@ -43,7 +43,7 @@
 /******/
 /******/ 	// script path function
 /******/ 	function jsonpScriptSrc(chunkId) {
-/******/ 		return __webpack_require__.p + "" + ({"js/chunks/course":"js/chunks/course","js/chunks/courses~js/chunks/my-courses":"js/chunks/courses~js/chunks/my-courses","js/chunks/courses":"js/chunks/courses","js/chunks/my-courses":"js/chunks/my-courses","js/chunks/enroll":"js/chunks/enroll","js/chunks/home":"js/chunks/home","js/chunks/login":"js/chunks/login","js/chunks/password-request":"js/chunks/password-request","js/chunks/password-reset":"js/chunks/password-reset","vendors~js/chunks/not-found":"vendors~js/chunks/not-found","js/chunks/not-found":"js/chunks/not-found"}[chunkId]||chunkId) + ".js"
+/******/ 		return __webpack_require__.p + "" + ({"js/chunks/course":"js/chunks/course","js/chunks/courses~js/chunks/my-courses":"js/chunks/courses~js/chunks/my-courses","js/chunks/courses":"js/chunks/courses","js/chunks/my-courses":"js/chunks/my-courses","js/chunks/enroll":"js/chunks/enroll","js/chunks/home":"js/chunks/home","js/chunks/login":"js/chunks/login","js/chunks/not-found":"js/chunks/not-found","js/chunks/password-request":"js/chunks/password-request","js/chunks/password-reset":"js/chunks/password-reset"}[chunkId]||chunkId) + ".js"
 /******/ 	}
 /******/
 /******/ 	// The require function
@@ -54958,6 +54958,19 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.filter('currency', _currency__WEBPACK_IMPORTED_MODULE_4__["currency"]);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('landing-layout', _layouts_Landing__WEBPACK_IMPORTED_MODULE_5__["default"]);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('auth-layout', _layouts_Auth__WEBPACK_IMPORTED_MODULE_6__["default"]);
+axios.interceptors.response.use(function (response) {
+  return response;
+}, function (error) {
+  _store__WEBPACK_IMPORTED_MODULE_1__["default"].commit('setLoading', false);
+
+  if (error.response.status === 500) {
+    alert(error.response.data.message);
+  } else if (error.response.status === 422) {
+    _store__WEBPACK_IMPORTED_MODULE_1__["default"].commit('setErrors', error.response.data.errors);
+  } else {
+    return Promise.reject(error);
+  }
+});
 var app = new vue__WEBPACK_IMPORTED_MODULE_0___default.a(_objectSpread({
   store: _store__WEBPACK_IMPORTED_MODULE_1__["default"],
   router: _router__WEBPACK_IMPORTED_MODULE_2__["default"]
@@ -54994,15 +55007,6 @@ try {
 
 window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
-window.axios.interceptors.response.use(function (response) {
-  return response;
-}, function (error) {
-  if (error.response.status === 500) {
-    alert(error.response.data.message);
-  } else {
-    return Promise.reject(error);
-  }
-});
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
  * for events that are broadcast by Laravel. Echo and event broadcasting
@@ -55670,7 +55674,7 @@ __webpack_require__.r(__webpack_exports__);
   alias: "*",
   name: "notFound",
   component: function component() {
-    return Promise.all(/*! import() | js/chunks/not-found */[__webpack_require__.e("vendors~js/chunks/not-found"), __webpack_require__.e("js/chunks/not-found")]).then(__webpack_require__.bind(null, /*! ../views/NotFound.vue */ "./resources/js/views/NotFound.vue"));
+    return __webpack_require__.e(/*! import() | js/chunks/not-found */ "js/chunks/not-found").then(__webpack_require__.bind(null, /*! ../views/NotFound.vue */ "./resources/js/views/NotFound.vue"));
   }
 }]);
 
@@ -55809,23 +55813,11 @@ function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) r
         commit('setUserData', response);
         var redirectPath = query.redirect || "/";
         _router_index__WEBPACK_IMPORTED_MODULE_0__["default"].push(redirectPath);
-      })["catch"](function (_ref4) {
-        var response = _ref4.response;
-
-        if (response.status === 422) {
-          commit('setErrors', response.data.errors, {
-            root: true
-          });
-        }
-
-        commit('setLoading', false, {
-          root: true
-        });
       });
     },
-    sendLogoutRequest: function sendLogoutRequest(_ref5) {
-      var commit = _ref5.commit,
-          getters = _ref5.getters;
+    sendLogoutRequest: function sendLogoutRequest(_ref4) {
+      var commit = _ref4.commit,
+          getters = _ref4.getters;
 
       if (getters.isAuthenticated) {
         return axios.post('/api/logout').then(function (response) {
@@ -55836,9 +55828,9 @@ function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) r
 
       _router_index__WEBPACK_IMPORTED_MODULE_0__["default"].push("/");
     },
-    sendResetRequest: function sendResetRequest(_ref6, data) {
-      var commit = _ref6.commit,
-          getters = _ref6.getters;
+    sendResetRequest: function sendResetRequest(_ref5, data) {
+      var commit = _ref5.commit,
+          getters = _ref5.getters;
       commit('setErrors', {}, {
         root: true
       });
@@ -55852,22 +55844,10 @@ function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) r
         commit('setLoading', false, {
           root: true
         });
-      })["catch"](function (_ref7) {
-        var response = _ref7.response;
-
-        if (response.status === 422) {
-          commit('setErrors', response.data.errors, {
-            root: true
-          });
-        }
-
-        commit('setLoading', false, {
-          root: true
-        });
       });
     },
-    resetPassword: function resetPassword(_ref8, data) {
-      var commit = _ref8.commit;
+    resetPassword: function resetPassword(_ref6, data) {
+      var commit = _ref6.commit;
       commit('setErrors', {}, {
         root: true
       });
@@ -55880,18 +55860,6 @@ function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) r
         });
         _router_index__WEBPACK_IMPORTED_MODULE_0__["default"].push({
           name: "home"
-        });
-      })["catch"](function (_ref9) {
-        var response = _ref9.response;
-
-        if (response.status === 422) {
-          commit('setErrors', response.data.errors, {
-            root: true
-          });
-        }
-
-        commit('setLoading', false, {
-          root: true
         });
       });
     }
@@ -56025,18 +55993,6 @@ __webpack_require__.r(__webpack_exports__);
         });
         _router__WEBPACK_IMPORTED_MODULE_0__["default"].push({
           name: "my-courses"
-        });
-      })["catch"](function (_ref2) {
-        var response = _ref2.response;
-
-        if (response.status === 422) {
-          commit('setErrors', response.data.errors, {
-            root: true
-          });
-        }
-
-        commit('setLoading', false, {
-          root: true
         });
       });
     }

@@ -10,6 +10,5 @@
     "/js/chunks/my-courses.js": "/js/chunks/my-courses.js",
     "/js/chunks/not-found.js": "/js/chunks/not-found.js",
     "/js/chunks/password-request.js": "/js/chunks/password-request.js",
-    "/js/chunks/password-reset.js": "/js/chunks/password-reset.js",
-    "/vendors~js/chunks/not-found.js": "/vendors~js/chunks/not-found.js"
+    "/js/chunks/password-reset.js": "/js/chunks/password-reset.js"
 }

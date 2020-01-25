@@ -37,12 +37,6 @@ export default {
 
           const redirectPath = query.redirect || "/";
           router.push(redirectPath);
-        })
-        .catch(({response}) => {
-          if(response.status === 422) {
-            commit('setErrors', response.data.errors, { root: true });
-          }
-          commit('setLoading', false, { root: true });
         });
     },
 
@@ -67,14 +61,6 @@ export default {
         .then(response => {
           commit('setStatus', response.data.status, { root: true });
           commit('setLoading', false, { root: true });
-        })
-        .catch(({response}) => {
-          if(response.status === 422)
-          {
-            commit('setErrors', response.data.errors, { root: true });
-          }
-
-          commit('setLoading', false, { root: true });
         });
     },
 
@@ -89,14 +75,6 @@ export default {
           router.push({
             name: "home"
           })
-        })
-        .catch(({response}) => {
-          if(response.status === 422)
-          {
-            commit('setErrors', response.data.errors, { root: true });
-          }
-
-          commit('setLoading', false, { root: true });
         });
     }
   }
