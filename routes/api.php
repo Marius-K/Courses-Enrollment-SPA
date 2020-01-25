@@ -3,8 +3,11 @@
 Route::group(['as' => 'api.', 'namespace' => 'Api\V1'], function () {
     Route::get('home', 'HomeController@index')->name('home');
     Route::get('menu', 'HomeController@menu')->name('menu');
-    
     Route::apiResource('courses', 'CourseController')->only(['index', 'show']);
+    Route::get('my-courses', 'EnrollmentController@myCourses')->name('my-courses');
+    Route::post('enroll', 'EnrollmentController@store')->name('enroll');
+    Auth::routes(['register' => false]);
+    Route::get('auth/user', 'Auth\UserController@user')->name('auth.user');
 
     Route::group(['prefix' => 'v1', 'as' => 'admin.', 'namespace' => 'Admin', 'middleware' => ['auth:api']], function () {
         // Permissions

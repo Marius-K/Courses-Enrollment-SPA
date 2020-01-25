@@ -1,5 +1,3 @@
-import axios from 'axios'
-
 export default {
   namespaced: true,
   state: {
@@ -9,17 +7,9 @@ export default {
   },
 
   getters: {
-    courses (state) {
-      return state.coursesData;
-    },
-
-    pagination (state) {
-      return state.paginationData;
-    },
-
-    course (state) {
-      return state.course;
-    }
+    courses: (state) => state.coursesData,
+    pagination: (state) => state.paginationData,
+    course: (state) => state.course
   },
 
   mutations: {
@@ -38,19 +28,31 @@ export default {
 
   actions: { 
     fetchAllCourses ({commit}, query) {
-      axios.get('/api/courses', {params: query})
-      .then(response => {
-        const {data, ...pagination} = response.data;
-        commit('setAllCourses', data);
-        commit('setPaginationData', pagination);
-      });
+      return axios.get('/api/courses', {params: query})
+          .then(response => {
+            const {data, ...pagination} = response.data;
+            commit('setAllCourses', data);
+            commit('setPaginationData', pagination);
+            commit('setLoading', false, { root: true });
+          });
     },
 
     fetchCourse ({commit}, id) {
-      axios.get('/api/courses/'+id)
-      .then(response => {
-        commit('setCourse', response.data);
-      });
+      return axios.get('/api/courses/'+id)
+          .then(response => {
+            commit('setCourse', response.data);
+            commit('setLoading', false, { root: true });
+          });
+    },
+
+    fetchMyCourses ({commit}, query) {
+      return axios.get('/api/my-courses', {params: query})
+          .then(response => {
+            const {data, ...pagination} = response.data;
+            commit('setAllCourses', data);
+            commit('setPaginationData', pagination);
+            commit('setLoading', false, { root: true });
+          });
     }
   }
 };

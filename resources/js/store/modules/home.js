@@ -1,5 +1,3 @@
-import axios from 'axios'
-
 export default {
   namespaced: true,
   state: {
@@ -8,13 +6,8 @@ export default {
   },
 
   getters: {
-    courses (state) {
-      return state.newestCourses;
-    },
-
-    institutions (state) {
-      return state.randomInstitutions;
-    }
+    courses: (state) => state.newestCourses,
+    institutions: (state) => state.randomInstitutions
   },
 
   mutations: {
@@ -26,9 +19,11 @@ export default {
 
   actions: {
     fetchHomeData ({commit}) {
-      axios.get('/api/home').then((response) => {
-        commit('setHomeData', response);
-      });
+      return axios.get('/api/home')
+        .then(response => {
+          commit('setHomeData', response);
+          commit('setLoading', false, { root: true });
+        });
     }
   }
 }

@@ -19,6 +19,10 @@
 export default {
   props: {
     title: String
+  },
+
+  mounted () {
+    this.$store.commit('setBreadcrumb', true);
   }
 }
 </script>

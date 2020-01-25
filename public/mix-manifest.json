@@ -1,9 +1,15 @@
 {
     "/js/app.js": "/js/app.js",
     "/css/app.css": "/css/app.css",
-    "/course.js": "/course.js",
-    "/courses.js": "/courses.js",
-    "/home.js": "/home.js",
-    "/notFound.js": "/notFound.js",
-    "/vendors~notFound.js": "/vendors~notFound.js"
+    "/js/chunks/course.js": "/js/chunks/course.js",
+    "/js/chunks/courses.js": "/js/chunks/courses.js",
+    "/js/chunks/courses~js/chunks/my-courses.js": "/js/chunks/courses~js/chunks/my-courses.js",
+    "/js/chunks/enroll.js": "/js/chunks/enroll.js",
+    "/js/chunks/home.js": "/js/chunks/home.js",
+    "/js/chunks/login.js": "/js/chunks/login.js",
+    "/js/chunks/my-courses.js": "/js/chunks/my-courses.js",
+    "/js/chunks/not-found.js": "/js/chunks/not-found.js",
+    "/js/chunks/password-request.js": "/js/chunks/password-request.js",
+    "/js/chunks/password-reset.js": "/js/chunks/password-reset.js",
+    "/vendors~js/chunks/not-found.js": "/vendors~js/chunks/not-found.js"
 }

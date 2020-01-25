@@ -1,5 +1,5 @@
 <template>
-  <header class="main_menu home_menu"> <!-- TODO: {! isset($breadcrumb) ? 'single_page_menu' : 'home_menu' !}"> -->
+  <header class="main_menu" :class="breadcrumb ? 'single_page_menu' : 'home_menu'">
     <div class="container">
       <div class="row align-items-center">
         <div class="col-lg-12">
@@ -46,18 +46,12 @@
                       >{{ institution.name }}</router-link>
                     </div>
                 </li>
-                    <!-- @auth TODO:
-                      <li class="nav-item">
-                          <a class="nav-link" href="{! route('enroll.myCourses') !}">My Courses</a>
-                      </li>
-                      <li class="d-none d-lg-block">
-                          <a class="btn_1" href="#" onclick="event.preventDefault(); document.getElementById('logoutform').submit();">Logout</a>
-                          <form id="logoutform" action="{! route('logout') !}" method="POST" style="display: none;">
-                              @csrf
-                          </form>
-                      </li>
-                        
-                    @endauth -->
+                <li class="nav-item" v-if="isAuthenticated">
+                    <router-link class="nav-link" :to="{name: 'my-courses'}">My Courses</router-link>
+                </li>
+                <li class="d-none d-lg-block" v-if="isAuthenticated">
+                    <button class="btn_1" @click="logout">Logout</button>
+                </li>
               </ul>
             </div>
           </nav>
@@ -75,6 +69,8 @@ export default {
     ...mapGetters({
       institutions: 'menu/menuInstitutions',
       disciplines: 'menu/menuDisciplines',
+      isAuthenticated: 'auth/isAuthenticated',
+      breadcrumb: 'breadcrumb'
     })
   },
 
@@ -84,7 +80,8 @@ export default {
 
   methods: {
     ...mapActions({
-      fetchMenuData: 'menu/fetchMenuData'
+      fetchMenuData: 'menu/fetchMenuData',
+      logout: 'auth/sendLogoutRequest'
     })
   }
 

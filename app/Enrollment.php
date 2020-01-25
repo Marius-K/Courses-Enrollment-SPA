@@ -27,6 +27,10 @@ class Enrollment extends Model
         'deleted_at',
     ];
 
+    protected $appends = [
+        'status_name'
+    ];
+
     const STATUS_RADIO = [
         'awaiting' => 'Awaiting',
         'accepted' => 'Accepted',
@@ -49,4 +53,10 @@ class Enrollment extends Model
     {
         return $this->belongsTo(Course::class, 'course_id');
     }
+
+    public function getStatusNameAttribute()
+    {
+        return self::STATUS_RADIO[$this->status];
+    }
+
 }

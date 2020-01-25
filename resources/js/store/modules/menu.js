@@ -1,5 +1,3 @@
-import axios from 'axios'
-
 export default {
   namespaced: true,
   state: {
@@ -8,13 +6,8 @@ export default {
   },
 
   getters: {
-    menuInstitutions (state) {
-      return state.institutions;
-    },
-
-    menuDisciplines (state) {
-      return state.disciplines;
-    }
+    menuInstitutions: (state) => state.institutions,
+    menuDisciplines: (state) => state.disciplines
   },
 
   mutations: {
@@ -26,7 +19,7 @@ export default {
 
   actions: {
     fetchMenuData ({commit}) {
-      axios.get('/api/menu').then((response) => {
+      return axios.get('/api/menu').then((response) => {
         commit('setMenuData', response);
       });
     }
