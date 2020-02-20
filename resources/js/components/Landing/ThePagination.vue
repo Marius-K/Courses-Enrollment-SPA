@@ -29,7 +29,7 @@
 
 <script>
 import {mapGetters} from 'vuex'
-import {pagination} from '../pagination'
+import {pagination} from '../../helpers/pagination'
 
 export default {
   computed: {

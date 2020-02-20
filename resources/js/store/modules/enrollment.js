@@ -21,10 +21,10 @@ export default {
 
       return axios.post("/api/enroll", data)
         .then(response => {
-          commit('auth/setUserData', response, {root: true});
+          commit('auth/setUserData', response.data, {root: true});
 
           router.push({
-            name: "my-courses"
+            name: "enrollments.index"
           });
         });
     }

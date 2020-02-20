@@ -47,7 +47,7 @@
                     </div>
                 </li>
                 <li class="nav-item" v-if="isAuthenticated">
-                    <router-link class="nav-link" :to="{name: 'my-courses'}">My Courses</router-link>
+                    <router-link class="nav-link" :to="{name: 'enrollments.index'}">My Courses</router-link>
                 </li>
                 <li class="d-none d-lg-block" v-if="isAuthenticated">
                     <button class="btn_1" @click="logout">Logout</button>

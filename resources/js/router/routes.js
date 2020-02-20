@@ -1,5 +1,5 @@
-import guest from "../middleware/guest"
-import auth from "../middleware/auth"
+import guest from "./middleware/guest"
+import auth from "./middleware/auth"
 
 export default [
   {
@@ -7,7 +7,7 @@ export default [
     name: "home",
     component: () =>
       import(
-        /* webpackChunkName: "js/chunks/home" */ "../views/Home.vue"
+        /* webpackChunkName: "js/chunks/home" */ "../views/Landing/Home.vue"
       ),
     props: true
   },
@@ -16,7 +16,7 @@ export default [
     name: "courses.index",
     component: () =>
       import(
-        /* webpackChunkName: "js/chunks/courses" */ "../views/Courses.vue"
+        /* webpackChunkName: "js/chunks/courses" */ "../views/Landing/Courses/Index.vue"
       ),
     props: true,
     query: true
@@ -26,13 +26,13 @@ export default [
     name: "courses.show",
     component: () =>
       import(
-        /* webpackChunkName: "js/chunks/course" */ "../views/Course.vue"
+        /* webpackChunkName: "js/chunks/course" */ "../views/Landing/Courses/Show.vue"
       ),
     props: true
   },
   {
     path: "/my-courses",
-    name: "my-courses",
+    name: "enrollments.index",
     meta: {
       middleware: [
         auth
@@ -40,16 +40,16 @@ export default [
     },
     component: () =>
       import(
-        /* webpackChunkName: "js/chunks/my-courses" */ "../views/MyCourses.vue"
+        /* webpackChunkName: "js/chunks/my-courses" */ "../views/Landing/Enrollments/Index.vue"
       ),
     props: true
   },
   {
     path: "/enroll/:id",
-    name: "enroll",
+    name: "enrollments.create",
     component: () =>
       import(
-        /* webpackChunkName: "js/chunks/enroll" */ "../views/EnrollCourse.vue"
+        /* webpackChunkName: "js/chunks/enroll" */ "../views/Landing/Enrollments/Create.vue"
       ),
     props: true 
   },
@@ -64,7 +64,7 @@ export default [
     },
     component: () =>
       import(
-        /* webpackChunkName: "js/chunks/login" */ "../views/Login.vue"
+        /* webpackChunkName: "js/chunks/login" */ "../views/Auth/Login.vue"
       )
   },
   {
@@ -78,7 +78,7 @@ export default [
     },
     component: () =>
       import(
-        /* webpackChunkName: "js/chunks/password-request" */ "../views/PasswordRequest.vue"
+        /* webpackChunkName: "js/chunks/password-request" */ "../views/Auth/PasswordRequest.vue"
       ),
   },
   {
@@ -92,7 +92,7 @@ export default [
     },
     component: () =>
       import(
-        /* webpackChunkName: "js/chunks/password-reset" */ "../views/PasswordReset.vue"
+        /* webpackChunkName: "js/chunks/password-reset" */ "../views/Auth/PasswordReset.vue"
       ),
     props: true,
     query: true
@@ -102,6 +102,6 @@ export default [
     alias: "*",
     name: "notFound",
     component: () =>
-      import(/* webpackChunkName: "js/chunks/not-found" */ "../views/NotFound.vue")
+      import(/* webpackChunkName: "js/chunks/not-found" */ "../views/Landing/NotFound.vue")
   }
 ];

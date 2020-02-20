@@ -34,7 +34,7 @@
                                 </li>
 
                             </ul>
-                            <router-link :to="{ name: 'enroll', params: { id: course.id } }" class="btn_1 d-block">Enroll the course</router-link>
+                            <router-link :to="{ name: 'enrollments.create', params: { id: course.id } }" class="btn_1 d-block">Enroll the course</router-link>
                         </div>
                     </div>
                 </div>
@@ -44,14 +44,9 @@
 </template>
 
 <script>
-import TheBreadcrumb from '../components/TheBreadcrumb.vue';
 import {mapActions, mapGetters} from 'vuex'
 
 export default {
-  components: {
-    TheBreadcrumb
-  },
-
   props: [
     'id'
   ],

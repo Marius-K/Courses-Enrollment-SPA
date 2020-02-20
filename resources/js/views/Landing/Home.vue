@@ -6,8 +6,8 @@
 </template>
 
 <script>
-import HomeNewestCourses from '../components/HomeNewestCourses'
-import HomeRandomInstitutions from '../components/HomeRandomInstitutions'
+import HomeNewestCourses from '../../components/Landing/Home/NewestCourses'
+import HomeRandomInstitutions from '../../components/Landing/Home/RandomInstitutions'
 import {mapActions} from 'vuex'
 
 export default {

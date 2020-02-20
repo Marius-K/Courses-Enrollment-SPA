@@ -45,13 +45,8 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
-import TheBreadcrumb from '../components/TheBreadcrumb'
 
 export default {
-    components: {
-        TheBreadcrumb
-    },
-
     props: [
         'id'
     ],
@@ -90,7 +85,8 @@ export default {
     methods: {
         ...mapActions('enrollment', [
             'sendEnrollRequest'
-        ])
+        ]),
+        log(log) {console.log(log)}
     },
 
     mounted () {

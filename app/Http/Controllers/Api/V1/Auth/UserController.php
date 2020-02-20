@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\V1\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\Admin\UserResource;
 
 class UserController extends Controller
 {
@@ -10,6 +11,6 @@ class UserController extends Controller
     {
         $user = auth()->user();
 
-        return response()->json($user);
+        return new UserResource($user);
     }
 }

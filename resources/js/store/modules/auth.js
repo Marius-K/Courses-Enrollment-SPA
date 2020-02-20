@@ -1,4 +1,4 @@
-import router from '../../router/index'
+import router from '../../router'
 
 export default {
   namespaced: true,
@@ -22,7 +22,7 @@ export default {
   actions: {
     fetchUserData ({commit}) {
       return axios.get('/api/auth/user').then(response => {
-        commit('setUserData', response);
+        commit('setUserData', response.data);
       });
     },
 
